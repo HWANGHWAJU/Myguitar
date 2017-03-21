@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="EUC-KR">
+<title>Check ID</title>
+<script type="text/javascript">
+function ConfirmID(){
+	var id = document.getElementById("wantID").value;
+	
+	if((id.length <5 || id.length >15)){
+		window.alert(" 아이디는 5자 이상 15자 이하로 입력하세요. ");
+		id.focus();
+	}
+	else if(id == wasid){
+		window.alert(" 이미 사용중인 아이디입니다. ");
+		document.checkIDform.wantID.focus();
+		document.checkIDform.wantID.select();
+	}
+	else{
+		//사용가능 할 때
+		//사용할지 안 할지 한 번더 질문
+		if(window.confirm(" 사용할 수 있는 아이디 입니다. \n 사용하시겠습니까?")){
+			//부모창 Join.html에 있는 텍스트 박스로 전송
+			opener.document.getElementById("inputid").value = document.getElementById("wantID").value;
+		} else {
+			//취소를 눌렀을 때
+			id.select();
+		}
+		window.close(); //팝업창 닫고 Join.html로 돌아감 
+	}
+}
+</script>
+</head>
+<body>
+<form action="" name="checkIDform" id="checkIDform" method="post">
+
+	        사용할 아이디 
+		<input type="text" id="wantID" name="wantID">
+		<input type="button" value="검사" onclick="ConfirmID();">
+
+</form>
+</body>
+</html>
