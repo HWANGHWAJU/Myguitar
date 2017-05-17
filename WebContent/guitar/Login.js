@@ -1,17 +1,31 @@
 
 
 
-/*function LoginCheck(){
-	var checkid = document.getElementById("userid").value;
-	var checkpw = document.getElementById("userpw").value;
+function LoginCheck(){
+	var checkid = document.getElementById("id").value;
+	var checkpw = document.getElementById("pw").value;
 	
+	if(checkid == null ){
+		alert("아이디를 입력하세요");
+		document.loginmain.id.focus();
+		return false;
+	}
+	else if(checkpw == null || checkpw.length < 8){
+		alert("비밀번호를 확인해주세요");
+		document.loginmain.pw.focus();
+		return false;
+	}
 
 }
-*/
+
 function JoinCheck(){
 	var joinid = document.getElementById("inputid").value;
 	var joinpw = document.getElementById("inputpw").value;
 	var joinpwcon = document.getElementById("pwcon").value;
+	var admin = "admin";
+	
+	if(joinid == admin ) { alert("이 아이디는 사용할 수 없습니다. "); return false;}
+	
 	
 	if(joinid.length < 5){
 		alert(" 아이디는 5자 이상으로 입력 해주세요.");
@@ -36,7 +50,5 @@ function JoinCheck(){
 	}
 }
 
-function CheckID(){
-	window.open("IDcheck.html", "chk", "width=300, height=100");
-}
+
 

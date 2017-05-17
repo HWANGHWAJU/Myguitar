@@ -6,12 +6,14 @@ public class ModifyRequest {
 
 	private String userId;
 	private int articleNumber;
+	private String header;
 	private String title;
 	private String content;
 
-	public ModifyRequest(String userId, int articleNumber, String title, String content) {
+	public ModifyRequest(String userId, int articleNumber, String header,String title, String content) {
 		this.userId = userId;
 		this.articleNumber = articleNumber;
+		this.header = header;
 		this.title = title;
 		this.content = content;
 	}
@@ -24,6 +26,10 @@ public class ModifyRequest {
 		return articleNumber;
 	}
 
+	public String getHeader(){
+		return header;
+	}
+	
 	public String getTitle() {
 		return title;
 	}

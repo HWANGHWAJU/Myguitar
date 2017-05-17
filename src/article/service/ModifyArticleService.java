@@ -29,7 +29,7 @@ public class ModifyArticleService {
 				throw new PermissionDeniedException();
 			}
 			articleDao.update(conn, 
-					modReq.getArticleNumber(), modReq.getTitle());
+					modReq.getArticleNumber(), modReq.getHeader(),modReq.getTitle());
 			contentDao.update(conn, 
 					modReq.getArticleNumber(), modReq.getContent());
 			conn.commit();

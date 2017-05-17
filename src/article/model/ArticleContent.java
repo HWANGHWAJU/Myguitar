@@ -6,10 +6,13 @@ public class ArticleContent {
 
 	private Integer number;
 	private String content;
-
-	public ArticleContent(Integer number, String content) {
+	private String filename;
+	
+	
+	public ArticleContent(Integer number, String content, String filename) {
 		this.number = number;
 		this.content = content;
+		this.filename=filename;
 	}
 
 	public Integer getNumber() {
@@ -18,6 +21,10 @@ public class ArticleContent {
 
 	public String getContent() {
 		return content;
+	}
+	
+	public String getFilename(){
+		return filename;
 	}
 
 }

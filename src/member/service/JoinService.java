@@ -12,21 +12,16 @@ public class JoinService {
 
 	private MemberDao memberDao = new MemberDao();	//값을 입력 받을 멤버 객체를 생성 
 	
+	//로그인 
 	public void join(JoinRequest joinReq) {
-
+			//요구에서 받은 아이디 존재 유무
 		Connection conn = null;
+		
 	
 		try {
 			conn = ConnectionProvider.getConnection();
 			conn.setAutoCommit(false);
-			
-			Member member = memberDao.selectById(conn, joinReq.getId()); //id 중복 확인 
-			if (member != null) {
-				JdbcUtil.rollback(conn);
-				throw new DuplicateIdException();
-			} //member의 데이터가 null이 아닌 값이 오면 같은 아이디가 있다는 뜻. 
-			//중복되는 아이디가 없을 때 하나의 member 객체를 생성해서 Dao를 통해 DB에 insert
-			memberDao.insert(conn,  	new Member(
+				memberDao.insert(conn,  	new Member(
 						joinReq.getId(), 
 						joinReq.getPw(), 
 						joinReq.getName(),
@@ -41,5 +36,35 @@ public class JoinService {
 		} finally {
 			JdbcUtil.close(conn); //연결 종료 
 		}
+		
 	}
+	
+	//아이디 중복 확인
+	public boolean DuplicateID(String id) throws SQLException{
+		
+		Connection conn = null;
+		boolean is = false;
+
+		try{
+			conn = ConnectionProvider.getConnection();
+			conn.setAutoCommit(false);
+			
+			Member mem = memberDao.selectById(conn, id);
+			
+			if(mem != null){
+				is = false;
+				System.out.println("동일있음. +"+is);
+				JdbcUtil.rollback(conn);
+				return is;
+			}
+			is = true;
+			System.out.println(is);
+			return is;
+		}finally{
+			JdbcUtil.close(conn);
+		}
+		
+	}
+	
+	
 }

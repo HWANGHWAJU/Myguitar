@@ -4,23 +4,32 @@ package article.model;
 
 public class Article {
 
+	private String header;
 	private Integer number;
-	private Writer writerid;
+	private AWriter writerid;
 	private String title;
+	private String date;
 	private int readCount;
 
-	public Article(Integer number, String title,  Writer writerid, 	 int readCount) {
+	public Article(String header,Integer number, String title,  AWriter writerid, String date,	 int readCount) {
+		this.header = header;
 		this.number = number;
 		this.writerid = writerid;
 		this.title = title;
+		this.date = date;
 		this.readCount = readCount;
 	}
 
+	
+	public String getHeader(){
+		return header;
+	}
+	
 	public Integer getNumber() {
 		return number;
 	}
 
-	public Writer getWriterid() {
+	public AWriter getWriterid() {
 		return writerid;
 	}
 
@@ -28,6 +37,9 @@ public class Article {
 		return title;
 	}
 
+	public String getDate(){
+		return date;
+	}
 	public int getReadCount() {
 		return readCount;
 	}

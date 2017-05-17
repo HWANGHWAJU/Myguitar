@@ -38,7 +38,7 @@ public class Member {
 	}
 
 	public boolean matchPassword(String pw) {
-		return pw.equals(pw);
+		return this.pw.equals(pw);
 	}
 
 	public void changePassword(String newPw) {

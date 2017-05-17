@@ -6,14 +6,22 @@
 		 import="article.dao.*"
 		 import="article.command.*"
 		 import="auth.service.*"
+		 import="java.util.*"
+		 import="java.text.*"
 		%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 
 <%
 
 	HttpSession sess = request.getSession(false);
 
-	User user = (User)sess.getAttribute("authUser");
+//	User user = (User)sess.getAttribute("authUser");
+	
+	Date date = new Date();
+	SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+	
+	String now = sdf.format(date);
+	String then ="";
 
 %>
 
@@ -22,9 +30,54 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <title>악보 게시판 </title>
-<style>
+
+<style type="text/css">
+
 @import url(http://fonts.googleaps.com/earlyaccess/nanumgothic.css);
 	body { font-family:'Nanum Gothic', sans-serif; }
+	
+	table.bbs {
+    border-collapse: collapse;
+
+
+
+}
+table.bbs thead td {
+	padding : 10px;
+    font-weight: bold;
+    vertical-align: top;
+    color: #369;
+    border-bottom: 3px solid #036;
+}
+
+
+table.bbs td.num{
+   width: 100px;
+
+    font-weight: bold;
+    vertical-align: top;
+    border-bottom: 1px solid #ccc;
+    background: #f3f6f7;
+}
+
+table.bbs td.read{
+   width: 100px;
+
+    font-weight: bold;
+    vertical-align: top;
+    border-bottom: 1px solid #ccc;
+    background: #f3f6f7;
+}
+
+table.bbs td {
+
+    vertical-align: center;
+    border-bottom: 1px solid #ccc;
+}
+	
+	
+	
+	
 </style>
 
 
@@ -37,54 +90,64 @@ function TransPage(str){
 </script>
 </head>
 	<body>
-	<h1>Music List</h1>
-User ID <%=user.getId() %>
 
-	<% 	ListArticleService listService = new ListArticleService();
-	
-		int pageno=1;
-		
-		ArticlePage music = listService.getArticlePage(pageno);
-		
-	%>
-	 
-	<marquee behavior="alternate" scrolldelay="100" direction="right"> 악보 게시판 @>--->---- </marquee>
-		<div>
-		<table class="bbs" width="800" heigth="200" border="2" bgcolor="D8D8D8">
-		<colgrup>
-			<col width="50" />
+
+	 <center>
+	<div>
+		<table class="bbs" width="900" height="200" border="2" >
+		<colgroup>
+			<col width="60" />
+			<col width="100"/>
 			<col width="500" />
 			<col width="100" />
-			<col width="50" />
-		</colgrup>
+			<col width="200"/>
+			<col width="60" />
+		</colgroup>
+	
 		<thead>
-		
 			<tr>
-			<td>번	호</td>
-			<td>제	목</td>
+			<td align="center">번	호</td>
+			<td align="center">말 머 리</td>
+			<td align="center">제	목</td>
 			
-			<td>작  성  자</td>
-			
-			<td>조  회  수</td>
+			<td align="center">작  성  자</td>
+			<td align="center">작 성  일</td>
+			<td align="center">조  회  수</td>
 			</tr>
 		</thead>
-		<tbody>
+	<%--now URL <%=request.getRequestURI() %> --%>
+	<% 	ListArticleService listService = new ListArticleService();
+
+		ArticlePage music = (ArticlePage)sess.getAttribute("articlePage");
+		
+		if(music == null){
+			music = listService.getArticlePage(1);
+			
+		}
+		
+	%>
+		<tbody id="list">
 		<% 
+
 			boolean isthat = music.hasNoArticles();
 			int total = music.getTotal();
 			if(isthat == true) {   %>
 			악보 없어 ! <%  } else {			
 			for(Article Music : music.getContent()){ %> 
-			<tr><p>
-			<td align="center"><p><%= Music.getNumber() %></p></td>
-			
+			<tr>
+			<td align="center" class="num"><p><%= Music.getNumber() %></p></td>
+			<!-- 말머리! 기타/ 우쿠렐레/베이스  / 피아노 etc -->
+			<td align="center"><p><%=Music.getHeader() %></p></td>
 			<td align="center"><p>
 			<a href="ReadMusic.jsp?musicnum=<%=Music.getNumber() %>">
 			<%= Music.getTitle() %></a>
-			
+			<% then = Music.getDate();
+					String _then = then.substring(0,10);
+					if( now.equals(_then)) { %> <img src="image/new.jpg">
+			<%}%>
 			<td align="center"><p><%= Music.getWriterid().getId() %></p></td>
-			
-			<td align="center"><p><%= Music.getReadCount() %></p></td>
+			<td align="center" class="date"><p></p><%=Music.getDate() %></td>
+			<td align="center" class="read"><p><%= Music.getReadCount() %></p></td>
 			
 			</tr>
 			
@@ -96,23 +159,28 @@ User ID <%=user.getId() %>
 				
 			
 				if(ismore == true) {  %>
-				<tr> <td colspan="4"> 
+				<tr> <td colspan="6" align="center"> 
 				<% 
 				int startpage = music.getStartPage();
 				int endpage = music.getEndPage();
 				int pNO =1;
 			
 				if( startpage > 5) { %>
-					<a href="ListPage.jsp?pageno =<%= (startpage-5) %>">이전</a>
+					<a href="ListPage.jsp?pageno=<%= (startpage-5) %>">이전</a>
 			<% } for( pNO = startpage; pNO <= endpage; pNO++ ) { %>
-					<a href="ListPage.jsp?pageno =<%= pNO %>">&lt;<%= pNO %>&gt;</a>
+				<a href="ListPage.jsp?pageno=<%=pNO %>">&lt;<%= pNO %>&gt;</a>
 				<% } if( endpage < startpage ) { %>
 					<a href="ListPage.jsp?pageno=<%=(startpage+5)%>">다음</a>
 					<% }
 				} %>
 			</table></div>
+	
+	
+		
+		<a href="WriteMusicView.jsp"> 글 쓰 기 </a>
 
-		<input type="button" value="글쓰기" onclick="TransPage('WriteMusicView.jsp')">
+</center>
+
 </body>
 </html>
 

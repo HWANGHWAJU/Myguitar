@@ -16,6 +16,8 @@
 	String age =request.getParameter("inputage");
 	String email=request.getParameter("inputemail");
 	
+	
+	
 	JoinService join = new JoinService();
 	
 	JoinRequest req = new JoinRequest();

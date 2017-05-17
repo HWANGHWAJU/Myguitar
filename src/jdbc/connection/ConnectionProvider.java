@@ -10,7 +10,7 @@ public class ConnectionProvider {
     public static Connection getConnection() throws SQLException {
     	
     	String DB_URL = "jdbc:mysql://127.0.0.1:3306/myguitar?verifyServerCertificate=false&useSSL=true";
-    	String USER = "root";
+    	String USER = "root";                                            
     	String PASSWORD = "940131";
     	
         return DriverManager.getConnection(

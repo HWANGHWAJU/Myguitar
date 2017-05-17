@@ -3,6 +3,7 @@ package auth.service;
 import java.sql.Connection;
 import java.sql.SQLException;
 
+import jdbc.JdbcUtil;
 import jdbc.connection.ConnectionProvider;
 import member.dao.MemberDao;
 import member.model.Member;
@@ -20,16 +21,20 @@ public class LoginService {
 			Member member = memberDao.selectById(conn, id);
 			
 			if (member == null) {
+				System.out.println("뭔데");
 				throw new LoginFailException();
 			}	//DB안에 객체가 없으면 로그인 실패 
 		
 			if (!member.matchPassword(password)) {
-				throw new LoginFailException();
+				System.out.println("뭔데 왜 안되는데");
+				throw new  LoginFailException();
 			}	//DB의 값과 PASSWORD가 맞지 않으면 로그인 실패 
-	
+			System.out.println(member.getId()+"\t"+member.getPw());
+			JdbcUtil.close(conn);
 			return new User(member.getId(), member.getName());	//로그인 성공시 USER객체로 아이디와 DB안에서 일치하는 이름 리턴 
 		}
 		catch (SQLException e) {
+			System.out.println("잘되다가 왜 안되는데");
 			throw new RuntimeException(e);
 		}	//디비 연결 중 오류가 생길 때 오류 출력 
 	}

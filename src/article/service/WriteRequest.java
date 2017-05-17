@@ -2,21 +2,29 @@ package article.service;
 
 import java.util.Map;
 
-import article.model.Writer;
+import article.model.AWriter;
 //악보 게시판에 글 쓰기 글 쓰는데 필요한 데이터 제공 
 public class WriteRequest {
 
-	private Writer writer;
+	private String header;
+	private AWriter writer;
 	private String title;
 	private String content;
+	private String filename;
 
-	public WriteRequest(Writer writer, String title, String content) {
+	public WriteRequest(String header,AWriter writer, String title, String content, String filename) {
+		this.header = header;
 		this.writer = writer;
 		this.title = title;
 		this.content = content;
+		this.filename = filename;
 	}
 
-	public Writer getWriter() {
+	public String getHeader(){
+		return header;
+	}
+	
+	public AWriter getWriter() {
 		return writer;
 	}
 
@@ -26,6 +34,10 @@ public class WriteRequest {
 
 	public String getContent() {
 		return content;
+	}
+	
+	public String getFilename(){
+		return filename;
 	}
 
 	public void validate(Map<String, Boolean> errors) {

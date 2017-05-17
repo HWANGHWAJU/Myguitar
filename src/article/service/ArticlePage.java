@@ -43,7 +43,8 @@ public class ArticlePage {
 			//게시글 하단에 마지막 페이지 수 표시 
 		}
 	}
-
+	
+	
 	public int getTotal() {
 		return total;
 	}

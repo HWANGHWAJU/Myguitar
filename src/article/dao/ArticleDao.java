@@ -1,5 +1,6 @@
 package article.dao;
 
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -11,7 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import article.model.Article;
-import article.model.Writer;
+import article.model.AWriter;
 import jdbc.JdbcUtil;
 
 //게시글 글쓰기 구현 
@@ -34,11 +35,10 @@ public class ArticleDao {
 			} finally {
 
 				JdbcUtil.close(pstmt);
+
 			}
 		}
-	
-	
-	
+		
 	//삽입에 성공하면 알티클로 리턴 실패하면 널 리턴 
 	public Article insert(Connection conn, Article article) throws SQLException {
 
@@ -46,14 +46,21 @@ public class ArticleDao {
 		PreparedStatement pstmt = null;
 		Statement stmt = null;
 		ResultSet rs = null;
-
+	
+		
 		
 		try {
 	
-			pstmt = conn.prepareStatement("insert into music "+ "(music_title, music_uploader ,music_readcnt) "+ "values (?,?,0)");
+			System.out.println("title :"+article.getTitle()+" id :"+article.getWriterid().getId()+" readcnt :"+0+" header :"+article.getHeader()+" date :"+article.getDate());
+			
+			
+			pstmt = conn.prepareStatement("insert into music "+ "(music_title, music_uploader, music_readcnt, header, date) "+ "values (?,?,0,?,?)");
 	
 			pstmt.setString(1, article.getTitle());
 			pstmt.setString(2, article.getWriterid().getId());
+//			pstmt.setInt(3, 0);
+			pstmt.setString(3, article.getHeader());
+			pstmt.setString(4, article.getDate());
 			
 
 			int insertedCount = pstmt.executeUpdate();
@@ -65,9 +72,10 @@ public class ArticleDao {
 				//새로 입력한 악보 데이터를 악보 객체에 리턴한다. 
 				if (rs.next()) {  
 					Integer newNo = rs.getInt(1);
-					return new Article(newNo, 
+					return new Article(article.getHeader(), newNo, 
 							article.getTitle(),
 							article.getWriterid(),
+							article.getDate(),
 						0);
 				}
 			}
@@ -76,6 +84,7 @@ public class ArticleDao {
 			JdbcUtil.close(rs);
 			JdbcUtil.close(stmt);
 			JdbcUtil.close(pstmt);
+
 		}
 	}
 
@@ -99,10 +108,35 @@ public class ArticleDao {
 		} finally {
 			JdbcUtil.close(rs);
 			JdbcUtil.close(stmt);
+
 		}
 	}
 
+	public int selectMyCount(Connection conn, String name) throws SQLException {
+		
+		PreparedStatement pstmt = null;
+		Statement stmt = null;
+		ResultSet rs = null;
+	
+		try {
+			
+			pstmt = conn.prepareStatement("select distinct count(*) from music where music_uploader = ? ");
+		
+			pstmt.setString(1, name);
+			
+			rs = pstmt.executeQuery();
+						
+			if (rs.next()) {
+				return rs.getInt(1); //전체 레코드 수 리턴 
+			}
+			return 0;
+		} 
+		finally {
+			JdbcUtil.close(rs);
+			JdbcUtil.close(stmt);
 
+		}
+	}
 	
 	
 	
@@ -130,6 +164,7 @@ public class ArticleDao {
 		} finally {
 			JdbcUtil.close(rs);
 			JdbcUtil.close(pstmt);
+
 		}
 	}
 
@@ -142,8 +177,8 @@ public class ArticleDao {
 
 	}*/
 	private Article convertArticle(ResultSet rs) throws SQLException {
-		return new Article( rs.getInt("music_num"), rs.getString("music_title"),     new Writer(rs.getString("music_uploader"))     ,    
-																																				rs.getInt("music_readcnt"));
+		return new Article( rs.getString("header"),rs.getInt("music_num"), rs.getString("music_title"),     new AWriter(rs.getString("music_uploader")) ,    
+																																			rs.getString("date")	,rs.getInt("music_readcnt"));
 	}
 
 	
@@ -175,8 +210,37 @@ public class ArticleDao {
 		} finally {
 			JdbcUtil.close(rs);
 			JdbcUtil.close(pstmt);
+
 		}
 	}
+//***************************************** 내가 쓴 글 목록 불러오기 배열로 불러오기 **************
+	public List<Article> selectByWriter(Connection conn, String name) throws SQLException{
+		
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+
+		try {
+			pstmt = conn.prepareStatement(
+					"select *from music where music_uploader = ? order by 1 desc"  );
+			
+			pstmt.setString(1, name);
+			rs = pstmt.executeQuery();
+			
+			List<Article> result = new ArrayList<>();
+			
+			while(rs.next()){
+				result.add(convertArticle(rs));
+			}
+			return result;
+			
+		} finally {
+			JdbcUtil.close(rs);
+			JdbcUtil.close(pstmt);
+
+		}
+	}
+	
+	
 	
 	public void increaseReadCount(Connection conn, int no) throws SQLException {
 		try (PreparedStatement pstmt = 
@@ -188,14 +252,17 @@ public class ArticleDao {
 		}
 	}
 	
-	public int update(Connection conn, int no, String title) throws SQLException {
+	public int update(Connection conn, int no,String header, String title) throws SQLException {
 		try (PreparedStatement pstmt = 
 				conn.prepareStatement(
-						"update article set title = ?, moddate = now() "+
+						"update music set music_title = ?, header=? "+
 						"where article_no = ?")) {
 			pstmt.setString(1, title);
-			pstmt.setInt(2, no);
+			pstmt.setString(2, header);
+			pstmt.setInt(3,no);
 			return pstmt.executeUpdate();
 		}
 	}
+
+
 }

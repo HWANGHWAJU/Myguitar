@@ -13,6 +13,10 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
 <title>Insert title here</title>
+<script type="text/javascript">
+	window.alert("잘 가 다신 오지마");
+
+</script>
 </head>
 <body>
 

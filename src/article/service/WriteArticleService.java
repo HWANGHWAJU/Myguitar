@@ -2,6 +2,7 @@ package article.service;
 
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import article.dao.ArticleContentDao;
@@ -29,17 +30,28 @@ public class WriteArticleService {
 			conn.setAutoCommit(false);
 
 			Article article = toArticle(req); 	//writerequest로 부터 music객체 생성 
+			
+			System.out.println("article로 변환");
 			Article savedArticle = articleDao.insert(conn, article);	//dao.insert 매소드 실행하고 결과값 savedaricle 에 할당 데이터의 pk값을 number로 갖는다
+			
+			System.out.println("insert 함수 실행");
 		
 			if (savedArticle == null) {
 				throw new RuntimeException("fail to insert article");
 			} //null이면 인서트 오류 
 			//insert 오류가 나지 않았다면 
+		
+			System.out.println("content insert");
 			ArticleContent content = new ArticleContent(
 					savedArticle.getNumber(),
-					req.getContent());
+					req.getContent(),
+					req.getFilename()
+					);
+			System.out.println("content insert Dao start");
 			ArticleContent savedContent = contentDao.insert(conn, content);
+		
 			//article 객체로 값 입력에 성공하고 난 뒤 그 내용을 입력 
+		
 			if (savedContent == null) {
 				throw new RuntimeException("fail to insert article_content");
 			}
@@ -60,6 +72,10 @@ public class WriteArticleService {
 	}
 
 	private Article toArticle(WriteRequest req) {
-		return new Article(null, req.getTitle(), req.getWriter(), 0);
+	
+		Date date = new Date();
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+	
+		return new Article(req.getHeader(),null, req.getTitle(), req.getWriter(), sdf.format(date),0);
 	}
 }

@@ -1,42 +1,43 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="EUC-KR">
+<meta charset="utf-8">
 <title>Check ID</title>
 <script type="text/javascript">
 function ConfirmID(){
 	var id = document.getElementById("wantID").value;
 	
 	if((id.length <5 || id.length >15)){
-		window.alert(" ¾ÆÀÌµğ´Â 5ÀÚ ÀÌ»ó 15ÀÚ ÀÌÇÏ·Î ÀÔ·ÂÇÏ¼¼¿ä. ");
-		id.focus();
+		window.alert(" ì•„ì´ë””ëŠ” 5ì ì´ìƒ 15ì ì´í•˜ë¡œ ì…ë ¥í•˜ì„¸ìš”. ");
+	id.focus();
+	return false;
 	}
-	else if(id == wasid){
-		window.alert(" ÀÌ¹Ì »ç¿ëÁßÀÎ ¾ÆÀÌµğÀÔ´Ï´Ù. ");
-		document.checkIDform.wantID.focus();
-		document.checkIDform.wantID.select();
-	}
-	else{
-		//»ç¿ë°¡´É ÇÒ ¶§
-		//»ç¿ëÇÒÁö ¾È ÇÒÁö ÇÑ ¹ø´õ Áú¹®
-		if(window.confirm(" »ç¿ëÇÒ ¼ö ÀÖ´Â ¾ÆÀÌµğ ÀÔ´Ï´Ù. \n »ç¿ëÇÏ½Ã°Ú½À´Ï±î?")){
-			//ºÎ¸ğÃ¢ Join.html¿¡ ÀÖ´Â ÅØ½ºÆ® ¹Ú½º·Î Àü¼Û
-			opener.document.getElementById("inputid").value = document.getElementById("wantID").value;
-		} else {
-			//Ãë¼Ò¸¦ ´­·¶À» ¶§
-			id.select();
-		}
-		window.close(); //ÆË¾÷Ã¢ ´İ°í Join.html·Î µ¹¾Æ°¨ 
-	}
+//	else if(id == wasid){
+//		window.alert(" ì´ë¯¸ ì‚¬ìš©ì¤‘ì¸ ì•„ì´ë””ì…ë‹ˆë‹¤. ");
+//		document.checkIDform.wantID.focus();
+//		document.checkIDform.wantID.select();
+//	}
+//	else{
+		//ì‚¬ìš©ê°€ëŠ¥ í•  ë•Œ
+		//ì‚¬ìš©í• ì§€ ì•ˆ í• ì§€ í•œ ë²ˆë” ì§ˆë¬¸
+//		if(window.confirm(" ì‚¬ìš©í•  ìˆ˜ ìˆëŠ” ì•„ì´ë”” ì…ë‹ˆë‹¤. \n ì‚¬ìš©í•˜ì‹œê² ìŠµë‹ˆê¹Œ?")){
+			//ë¶€ëª¨ì°½ Join.htmlì— ìˆëŠ” í…ìŠ¤íŠ¸ ë°•ìŠ¤ë¡œ ì „ì†¡
+//			opener.document.getElementById("inputid").value = document.getElementById("wantID").value;
+	//	} else {
+//			//ì·¨ì†Œë¥¼ ëˆŒë €ì„ ë•Œ
+//			id.select();
+//		}
+//		window.close(); //íŒì—…ì°½ ë‹«ê³  Join.htmlë¡œ ëŒì•„ê° 
+//	}
 }
 </script>
 </head>
 <body>
-<form action="" name="checkIDform" id="checkIDform" method="post">
+<form action="IDcheck.jsp" name="checkIDform" id="checkIDform" method="post">
 
-	        »ç¿ëÇÒ ¾ÆÀÌµğ 
+	        ì‚¬ìš©í•  ì•„ì´ë”” 
 		<input type="text" id="wantID" name="wantID">
-		<input type="button" value="°Ë»ç" onclick="ConfirmID();">
+		<input type="button" value="ê²€ì‚¬" onclick="ConfirmID();">
 
 </form>
 </body>
