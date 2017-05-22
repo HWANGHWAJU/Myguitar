@@ -255,8 +255,7 @@ public class ArticleDao {
 	public int update(Connection conn, int no,String header, String title) throws SQLException {
 		try (PreparedStatement pstmt = 
 				conn.prepareStatement(
-						"update music set music_title = ?, header=? "+
-						"where article_no = ?")) {
+						"update music set music_title = ?, header=? where music_num = ?")) {
 			pstmt.setString(1, title);
 			pstmt.setString(2, header);
 			pstmt.setInt(3,no);

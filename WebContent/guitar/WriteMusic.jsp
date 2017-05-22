@@ -34,7 +34,7 @@
 	
 //	String uploadPath = application.getRealPath("upload");
 
-		String uploadPath ="D://workspace_hyun/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps/Myguitar/guitar/upload";
+		String uploadPath ="D://workspace_hyun/.metadata/.plugins/org.eclipse.wst.server.core/tmp1/wtpwebapps/Myguitar/guitar/upload";
 	
 	int size = 10*1024*1024;
 	
@@ -61,7 +61,7 @@
 		filename = multi.getFilesystemName("musicfile");	//데이터에 저장될 객체 변수로 넘어가면 된다. 
 	
 		originalFilename = multi.getOriginalFileName(file1);
-		
+		out.print(filename);
 		File f = multi.getFile("musicfile");
 		
 		WriteArticleService writeService = new WriteArticleService();

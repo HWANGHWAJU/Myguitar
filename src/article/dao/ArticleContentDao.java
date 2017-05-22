@@ -33,7 +33,7 @@ public class ArticleContentDao {
 		String originalFilename = "";
 		
 		*/
-		
+		System.out.println("입력 파일 이름 : "+content.getFilename());
 		PreparedStatement pstmt = null;
 		try {
 /*			
@@ -103,13 +103,14 @@ public class ArticleContentDao {
 		}
 	}
 
-	public int update(Connection conn, int no, String content) throws SQLException {
+	public int update(Connection conn, int no, String content, String filename) throws SQLException {
+		System.out.println("update에서 파일 이름"+filename);
 		try (PreparedStatement pstmt = 
 				conn.prepareStatement(
-						"update article_content set content = ? "+
-						"where article_no = ?")) {
+						"update music_content set content = ?, filename =?  where music_num = ?")) {
 			pstmt.setString(1, content);
-			pstmt.setInt(2, no);
+			pstmt.setString(2, filename);
+			pstmt.setInt(3, no);
 			return pstmt.executeUpdate();
 		}
 	}

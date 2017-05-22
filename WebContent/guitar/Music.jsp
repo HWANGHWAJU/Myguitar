@@ -166,7 +166,7 @@ function TransPage(str){
 				int pNO =1;
 			
 				if( startpage > 5) { %>
-					<a href="ListPage.jsp?pageno=<%= (startpage-5) %>">이전</a>
+		<a href="ListPage.jsp?pageno=<%= (startpage-5) %>">이전</a>
 			<% } for( pNO = startpage; pNO <= endpage; pNO++ ) { %>
 				<a href="ListPage.jsp?pageno=<%=pNO %>">&lt;<%= pNO %>&gt;</a>
 				<% } if( endpage < startpage ) { %>

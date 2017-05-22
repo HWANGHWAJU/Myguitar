@@ -14,25 +14,26 @@ public class ModifyArticleService {
 	private ArticleDao articleDao = new ArticleDao();
 	private ArticleContentDao contentDao = new ArticleContentDao();
 
-	public void modify(ModifyRequest modReq) {
+	public boolean modify(ModifyRequest modReq) {
+		boolean ok=false;
 		Connection conn = null;
+		System.out.println("글 제목 :"+modReq.getTitle());
+		System.out.println("파일 이름 :"+modReq.getFilename());
 		try {
 			conn = ConnectionProvider.getConnection();
 			conn.setAutoCommit(false);
 			
-			Article article = articleDao.selectById(conn, 
-					modReq.getArticleNumber());
+			Article article = articleDao.selectById(conn, modReq.getArticleNumber());
+			
 			if (article == null) {
 				throw new ArticleNotFoundException();
 			}
-			if (!canModify(modReq.getUserId(), article)) {
-				throw new PermissionDeniedException();
-			}
-			articleDao.update(conn, 
-					modReq.getArticleNumber(), modReq.getHeader(),modReq.getTitle());
-			contentDao.update(conn, 
-					modReq.getArticleNumber(), modReq.getContent());
+
+			articleDao.update(conn, modReq.getArticleNumber(), modReq.getHeader(),modReq.getTitle());
+			contentDao.update(conn, modReq.getArticleNumber(), modReq.getContent(),modReq.getFilename());
 			conn.commit();
+			ok = true;
+			return ok;
 		} catch (SQLException e) {
 			JdbcUtil.rollback(conn);
 			throw new RuntimeException(e);
@@ -44,7 +45,5 @@ public class ModifyArticleService {
 		}
 	}
 
-	private boolean canModify(String modfyingUserId, Article article) {
-		return article.getWriterid().getId().equals(modfyingUserId);
-	}
+
 }
