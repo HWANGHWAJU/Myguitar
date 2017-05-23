@@ -33,7 +33,8 @@ public class ArticleContentDao {
 		String originalFilename = "";
 		
 		*/
-		System.out.println("입력 파일 이름 : "+content.getFilename());
+		System.out.println("입력 파일 이름 : "+content.getFilename1());
+		System.out.println("입력 파일 이름 2 : "+content.getFilename2());
 		PreparedStatement pstmt = null;
 		try {
 /*			
@@ -53,11 +54,12 @@ public class ArticleContentDao {
 			
 			System.out.println("ArticleContentDao Insert method");
 			
-			pstmt = conn.prepareStatement( "insert into music_content (music_num, content, filename) values (?,?,?)");
+			pstmt = conn.prepareStatement( "insert into music_content (music_num, content, filename, filename2) values (?,?,?,?)");
 
 			pstmt.setLong(1, content.getNumber());
 			pstmt.setString(2, content.getContent());
-			pstmt.setString(3, content.getFilename());
+			pstmt.setString(3, content.getFilename1());
+			pstmt.setString(4, content.getFilename2());
 //			pstmt.setBinaryStream(3, input,(int)f.length());
 	
 			int insertedCount = pstmt.executeUpdate();
@@ -92,7 +94,7 @@ public class ArticleContentDao {
 			ArticleContent content = null;
 			if (rs.next()) {
 				content = new ArticleContent(
-						rs.getInt("music_num"), rs.getString("content"),rs.getString("filename"));
+						rs.getInt("music_num"), rs.getString("content"),rs.getString("filename"), rs.getString("filename2"));
 			}
 			return content;
 	
@@ -103,14 +105,16 @@ public class ArticleContentDao {
 		}
 	}
 
-	public int update(Connection conn, int no, String content, String filename) throws SQLException {
-		System.out.println("update에서 파일 이름"+filename);
+	public int update(Connection conn, int no, String content, String newfile, String newfile2) throws SQLException {
+		System.out.println("update에서 파일 이름1"+newfile);
+		System.out.println("update에서 파일 이름 2" +newfile2);
 		try (PreparedStatement pstmt = 
 				conn.prepareStatement(
-						"update music_content set content = ?, filename =?  where music_num = ?")) {
+						"update music_content set content = ?, filename =?, filename2=?  where music_num = ?")) {
 			pstmt.setString(1, content);
-			pstmt.setString(2, filename);
-			pstmt.setInt(3, no);
+			pstmt.setString(2, newfile);
+			pstmt.setString(3, newfile2);
+			pstmt.setInt(4, no);
 			return pstmt.executeUpdate();
 		}
 	}

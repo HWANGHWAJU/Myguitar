@@ -21,8 +21,11 @@ public class ArticleData {
 		return content.getContent();
 	}
 	
-	public String getFilename(){
-		return content.getFilename();
+	public String getFilename1(){
+		return content.getFilename1();
 	}
 
+	public String getFilename2(){
+		return content.getFilename2();
+	}
 }

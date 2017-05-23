@@ -6,13 +6,15 @@ public class ArticleContent {
 
 	private Integer number;
 	private String content;
-	private String filename;
+	private String filename1;
+	private String filename2;
 	
 	
-	public ArticleContent(Integer number, String content, String filename) {
+	public ArticleContent(Integer number, String content, String filename1, String filename2) {
 		this.number = number;
 		this.content = content;
-		this.filename=filename;
+		this.filename1=filename1;
+		this.filename2=filename2;
 	}
 
 	public Integer getNumber() {
@@ -23,8 +25,11 @@ public class ArticleContent {
 		return content;
 	}
 	
-	public String getFilename(){
-		return filename;
+	public String getFilename1(){
+		return filename1;
+	}
+	public String getFilename2(){
+		return filename2;
 	}
 
 }

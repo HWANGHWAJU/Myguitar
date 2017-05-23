@@ -145,7 +145,7 @@
 				
 					<tr>
 					<td>제 목 &nbsp;</td>
-					<td><select id="header" name="header">
+					<td colspan="2"><select id="header" name="header">
 								<option value="" selected="selected">말머리</option>
 								<option value="guitar" >Guitar</option>
 								<option value="ukulele" >Ukulele</option>
@@ -158,14 +158,15 @@
 				 	
 					<tr><td height="30"></td></tr>
 					<tr>
-						<td> 내 용 &nbsp;</td>
+						<td colspan="2"> 내 용 &nbsp;</td>
 						<td>	<textarea rows="10" cols="80" id="Musictext" name="Musictext"placeholder="내용을 입력하세요."></textarea>
 						</td>
 					</tr>
 				<tr><td height="30"></td></tr>
 					<tr>
 						<td> 파 일 &nbsp;</td>
-						<td> <input type="file" id="musicfiile" name="musicfile"></td>
+						<td><input type="file" id="musicfiile" name="musicfile"></td>
+						<td><input type="file" id="musicfile2" name="musicfile2"></td>
 					</tr>
 			</table>
 			<div class="space"></div>

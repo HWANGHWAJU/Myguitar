@@ -10,14 +10,16 @@ public class WriteRequest {
 	private AWriter writer;
 	private String title;
 	private String content;
-	private String filename;
+	private String filename1;
+	private String filename2;
 
-	public WriteRequest(String header,AWriter writer, String title, String content, String filename) {
+	public WriteRequest(String header,AWriter writer, String title, String content, String filename1, String filename2) {
 		this.header = header;
 		this.writer = writer;
 		this.title = title;
 		this.content = content;
-		this.filename = filename;
+		this.filename1 = filename1;
+		this.filename2 = filename2;
 	}
 
 	public String getHeader(){
@@ -36,8 +38,12 @@ public class WriteRequest {
 		return content;
 	}
 	
-	public String getFilename(){
-		return filename;
+	public String getFilename1(){
+		return filename1;
+	}
+	
+	public String getFilename2(){
+		return filename2;
 	}
 
 	public void validate(Map<String, Boolean> errors) {

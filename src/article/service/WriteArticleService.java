@@ -45,7 +45,8 @@ public class WriteArticleService {
 			ArticleContent content = new ArticleContent(
 					savedArticle.getNumber(),
 					req.getContent(),
-					req.getFilename()
+					req.getFilename1(),
+					req.getFilename2()
 					);
 			System.out.println("content insert Dao start");
 			ArticleContent savedContent = contentDao.insert(conn, content);

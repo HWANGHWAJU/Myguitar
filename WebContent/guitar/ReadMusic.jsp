@@ -205,16 +205,34 @@
 							<td>Header</td>
 							<td><%=articleData.getArticle().getHeader() %></td>
 					</tr>
-					
-					<Tr>
-						<td>파일</td>
-						<td>
-							<%if(articleData.getFilename() != null) { %>
-							<a href="fileDown.jsp?file_name=<%= articleData.getFilename()%>"><%=articleData.getFilename() %></a>
-							<%} else {%>업로드된 파일이 없습니다. <%} %>
+				<%
+					String prev1=articleData.getFilename1();
+					String prev2=articleData.getFilename2();
+				%>
+				
+				<tr>
+					<td>파일</td>
+						<td width="300">
+							<div id="bye1" style="display:block;">
+								<%if(prev1 == null){ %>
+									등록된 파일이 없습니다. 
+								<%}else if(prev1 != null){ %>
+								<%=prev1 %>
+								<%} %>
+							</div>
+						</td>
+						<td width="300">
+							<div id="bye2" style="display:block;">
+								<% if(prev2 == null){ %>
+									등록된 파일이 없습니다. 
+								<%}else if(prev2 != null){ %>
+								<%=prev2 %>
+								<%} %>
+							</div>
 						</td>
 					</tr>
-					<tr>
+				
+				<tr>
 						<!-- 내용 -->
 						<td>Content</td>
 						<td align="right"><input type="checkbox" id="scrapboard" name="scrapboard" value="<%=board%>"onclick="scrap(this);">
@@ -228,15 +246,20 @@
 				</table>
 				
 				<div class="space"></div>
-					<div style="text-align: center">
+				<div style="text-align: center">
 							<a href="javascript:imgShow('img');">Show me your file ; )</a>
-					</div>
-				<div class="container text-center" id="img" style="display:none;">
-					<%if(articleData.getFilename() != null ){ %>
-					<img src="upload/<%=articleData.getFilename() %>">
-				
-				<%} %>
 				</div>
+			
+				<div class="container text-center" id="img" style="display:none;">
+					<%if(articleData.getFilename1() != null ){ %>
+					<img src="upload/<%=articleData.getFilename1() %>">
+					<%}
+						if(articleData.getFilename2()!=null){	%>
+						<img src="upload/<%=articleData.getFilename2() %>">
+					<%} %>
+				</div>
+				
+				
 				<div style="padding-top: 20px;">
 					<%if(user.getId().equals(article_writer)) { %>
 					<a href="#" onclick="deleteArticle(<%=articleData.getArticle().getNumber()%>)">[삭제]</a>
@@ -244,6 +267,7 @@
 					<%} %>
 					<a href="index.jsp?#music">[목록]</a>
 				</div>
+				
 			</div> <!-- table div -->
 		
 		<div class="space"></div>

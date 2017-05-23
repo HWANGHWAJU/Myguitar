@@ -9,15 +9,17 @@ public class ModifyRequest {
 	private String header;
 	private String title;
 	private String content;
-	private String filename;
+	private String newfile;
+	private String newfile2;
 
-	public ModifyRequest(String userId, int articleNumber, String header,String title, String content, String filename) {
+	public ModifyRequest(String userId, int articleNumber, String header,String title, String content, String new1, String newfile2) {
 		this.userId = userId;
 		this.articleNumber = articleNumber;
 		this.header = header;
 		this.title = title;
 		this.content = content;
-		this.filename = filename;
+		this.newfile = new1;
+		this.newfile2 = newfile2;
 	}
 
 	public String getUserId() {
@@ -40,8 +42,12 @@ public class ModifyRequest {
 		return content;
 	}
 
-	public String getFilename(){
-		return filename;
+	public String getFilename1(){
+		return newfile;
+	}
+	
+	public String getFilename2(){
+		return newfile2;
 	}
 	public void validate(Map<String, Boolean> errors) {
 		if (title == null || title.trim().isEmpty()) {

@@ -38,34 +38,58 @@
 	
 	int size = 10*1024*1024;
 	
-	String name="";
 	String filename ="";
+	String filename2="";
 	String originalFilename = "";
+	String originalFilename2="";
 	
-	MultipartRequest multi = new MultipartRequest(request, uploadPath, size, "utf-8",new DefaultFileRenamePolicy());
+	ArrayList<String> filenames = new ArrayList<String>();
+	ArrayList<String> originalnames = new ArrayList<String>();
 	
+	String title="";
+	String content="";
+	String header ="";
+	String board="";
 	
-		String title = multi.getParameter("Musictitle");
-		String content =multi.getParameter("Musictext");
-		String header = multi.getParameter("header");
-		String board =multi.getParameter("board");
-		
-		AWriter writer = new AWriter(user.getId());
+	AWriter writer = new AWriter(user.getId());
 
-		
-		Enumeration files = multi.getFileNames();
 	
-		
-		String file1 = (String)files.nextElement();
+	try{
 	
-		filename = multi.getFilesystemName("musicfile");	//데이터에 저장될 객체 변수로 넘어가면 된다. 
+			MultipartRequest multi = new MultipartRequest(request, uploadPath, size, "utf-8",new DefaultFileRenamePolicy());
+				
+				 title = multi.getParameter("Musictitle");
+				 content =multi.getParameter("Musictext");
+			 	 header = multi.getParameter("header");
+			     board =multi.getParameter("board");
+				
+				Enumeration files = multi.getFileNames();
+				
+				while(files.hasMoreElements()){
+				String name = (String)files.nextElement();
+					filenames.add(multi.getFilesystemName(name));
+					originalnames.add(multi.getFilesystemName(name));
+				}
+		     
+			}catch(Exception e){
+				e.printStackTrace();
+			}
 	
-		originalFilename = multi.getOriginalFileName(file1);
-		out.print(filename);
-		File f = multi.getFile("musicfile");
-		
+			int cnt = 0;
+			String[] str = new String[2];
+			
+			for(int i=filenames.size()-1;i>=0;i--){
+				if(filenames.get(i) != null){
+					str[cnt] = filenames.get(i);
+					cnt++;
+				}
+			}
+	
+		filename = str[0];
+		filename2 = str[1];
+	
 		WriteArticleService writeService = new WriteArticleService();
-		WriteRequest writeRequest = new WriteRequest(header,writer, title, content,filename);
+		WriteRequest writeRequest = new WriteRequest(header,writer, title, content,filename, filename2);
 		
 
 		int newArticleNum = writeService.write(writeRequest);
@@ -73,7 +97,7 @@
 		
 		
 //		File f = new File(uploadPath+"\\"+filename);
-		
+	/* 	
 		FileInputStream input = new FileInputStream(f);
 		
 		try{
@@ -96,7 +120,7 @@
 		}catch(Exception e){
 			e.printStackTrace();
 		}
-		
+		 */
 		
 		
 		sess.setAttribute("newArticleNum", newArticleNum);
