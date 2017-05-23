@@ -192,18 +192,18 @@
 					<tr>
 						<!-- 번호  -->
 							<td>No</td>
-							<td><%=articleData.getArticle().getNumber() %></td>
+							<td colspan="2"><%=articleData.getArticle().getNumber() %></td>
 							</tr>
 							<% String article_writer = articleData.getArticle().getWriterid().getId();%>
 						<tr>
 						<!-- 작성자 -->
 							<td>Writer</td>
-							<td><%=article_writer %></td>
+							<td colspan="2"><%=article_writer %></td>
 						</tr>
 						<tr>
 						<!-- 말머리 -->
 							<td>Header</td>
-							<td><%=articleData.getArticle().getHeader() %></td>
+							<td colspan="2"><%=articleData.getArticle().getHeader() %></td>
 					</tr>
 				<%
 					String prev1=articleData.getFilename1();
@@ -235,11 +235,11 @@
 				<tr>
 						<!-- 내용 -->
 						<td>Content</td>
-						<td align="right"><input type="checkbox" id="scrapboard" name="scrapboard" value="<%=board%>"onclick="scrap(this);">
+						<td align="right"colspan="2"><input type="checkbox" id="scrapboard" name="scrapboard" value="<%=board%>"onclick="scrap(this);">
 						스크랩</td>
 						</tr>
 					<tr>
-						<td colspan="2" width="100%" id="content">
+						<td colspan="3" width="100%" id="content">
 							<%=articleData.getContent() %>
 						</td>
 					</tr>

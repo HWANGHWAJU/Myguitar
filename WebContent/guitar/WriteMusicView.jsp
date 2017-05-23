@@ -74,6 +74,10 @@
 	height: 70px;
 		
 		}
+div .container .form .f{
+/*	border : 1px solid pink; */
+	margin-bottom:30px;
+}
 
 </style>
 
@@ -140,41 +144,54 @@
 		<div class="space"></div>
 		
 		<div class="form">
-			<form action="WriteMusic.jsp" method="post" name="inputMusic" enctype="multipart/form-data">
-				<table>
+			<div class="f">
+			<form action="WriteMusic.jsp" method="post" name="inputMusic" enctype="multipart/form-data" id="form">
+				<table width="100%">
 				
 					<tr>
-					<td>제 목 &nbsp;</td>
-					<td colspan="2"><select id="header" name="header">
+						<td width="10%">Title</td>
+						<td align="left"  class="head">&nbsp;<select id="header" name="header" >
 								<option value="" selected="selected">말머리</option>
 								<option value="guitar" >Guitar</option>
 								<option value="ukulele" >Ukulele</option>
 								<option value="piano" >Piano</option>
 								<option value="etc">기타</option>
-							</select> 
-					
-				 <input type="text" id="Musictitle" name="Musictitle" style="width:500px"></td>
+							</select></td>
+						<td></td>
 				 	</tr>
 				 	
-					<tr><td height="30"></td></tr>
 					<tr>
-						<td colspan="2"> 내 용 &nbsp;</td>
-						<td>	<textarea rows="10" cols="80" id="Musictext" name="Musictext"placeholder="내용을 입력하세요."></textarea>
+						<td>&nbsp;</td>
+						<td height="30" colspan="2">
+						<input type="text" id="Musictitle" name="Musictitle" style="width:85%; margin-left:0; padding-left:0;">
 						</td>
 					</tr>
-				<tr><td height="30"></td></tr>
+					
 					<tr>
-						<td> 파 일 &nbsp;</td>
+						<td> Context </td>
+						<td width="100%" colspan="2">	<textarea rows="10" cols="99" id="Musictext" name="Musictext"placeholder="내용을 입력하세요."></textarea>
+						</td>
+					</tr>
+					
+				<tr><td height="30" colspan="3"></td></tr>
+				
+					<tr>
+						<td> Files</td>
 						<td><input type="file" id="musicfiile" name="musicfile"></td>
 						<td><input type="file" id="musicfile2" name="musicfile2"></td>
 					</tr>
+					
 			</table>
-			<div class="space"></div>
-	
+				<div class="space"></div>
+								<a href="index.jsp?#music" >[목록]</a>&nbsp;
 								<input type="hidden" name="board" value="music">
-								<input type="submit" value="등록" >
+								<a href="#" onclick="submit();">[등록]</a>
 			
-			</form>
+				</form>
+				
+			<div class="space"></div>
+					
+			</div>
 		</div>
 		
 	</div>
@@ -207,6 +224,11 @@
     <!-- Javascripts
     ================================================== -->
     <script type="text/javascript" src="js/main.js"></script>
+    <script type="text/javascript">
+    function submit(){
+    	document.getElementById("form").submit();
+    }
+    </script>
     
 </body>
 </html>
