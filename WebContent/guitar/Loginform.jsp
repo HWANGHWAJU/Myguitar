@@ -63,16 +63,9 @@
 		
 		}
 
-
- .form{
-
-	
-	border-bottom:2px solid;
-	border-left : 2px solid;
-	border-right : 2px solid;
-	border-top:2px dot;
-	border-color: #AE7D34;
-
+.tbl{
+	border:1px solid #AE7D34;
+	padding:30px;
 }
 
 	table tr{
@@ -123,42 +116,47 @@ function TransPage(str){
 
 <div class="space"></div>
 <div class="space"></div>
-<div class="container text-center">
-	<div class="row">
 
-<form action="Login.jsp" method="post" name="loginmain">
-<table align="center"   width="100%"  height="400" class="form" >
-
-	<tr>
-		<td colspan="2" align="right"  style="vertical-align: bottom;"> ID  </td>
-		<td style="vertical-align: bottom;"><input type="text" id="id" name="id" ></td>
-		<td rowspan="4"><input type="submit" value="Login"  class="btn">
-		<td rowspan="5" width="50%">
-			<ul class="bxslider">
-				<li><img src="img/portfolio/01.jpg"></li>
-				<li><img src="img/portfolio/02.jpg"></li>
-				<li><img src="img/portfolio/03.jpg"></li>
-				<li><img src="img/portfolio/04.jpg"></li>
-			</ul>
-		</td>
-	</tr>
+	<div class="container text-center">
+		<div class="row">
+				<div class="tbl">
+					<form action="Login.jsp" method="post" name="loginmain">
+						<table align="center"   width="100%"  height="400" class="form" >
+						
+							<tr>
+								<td colspan="2" align="right"  style="vertical-align: bottom;"> ID  </td>
+								<td style="vertical-align: bottom;"><input type="text" id="id" name="id" ></td>
+								<td rowspan="4"><input type="submit" value="Login"  class="btn">
+								<td rowspan="5" width="50%">
+									<ul class="bxslider">
+										<li><img src="img/portfolio/01.jpg"></li>
+										<li><img src="img/portfolio/02.jpg"></li>
+										<li><img src="img/portfolio/03.jpg"></li>
+										<li><img src="img/portfolio/04.jpg"></li>
+									</ul>
+								</td>
+							</tr>
+							
+							<tr>
+								<td colspan="2" align="right" > PASSWORD </td>
+								<td><input type="password" id="pw" name="pw"></td>
+							</tr>
+						
+							<tr align="center" >
+							<td colspan="4" align="center"><input type="button"  value="ID/PW 찾기" class="btn"" onclick="TransPage('Findmine.jsp');">&nbsp;&nbsp;&nbsp;
+							<input type="button" value="회원 가입" onclick="TransPage('JoinForm.jsp');" class="btn"></td>
+							</tr>
+							
+						</table>
+					</form>
+			</div>
+		</div>
+	</div>
 	
-	<tr>
-		<td colspan="2" align="right" > PASSWORD </td>
-		<td><input type="password" id="pw" name="pw"></td>
-	</tr>
+<div class="space"></div>
+<div class="space"></div>
+<div class="space"></div>
 
-	<tr align="center" >
-	<td colspan="4" align="center"><input type="button"  value="ID/PW 찾기" class="btn"" onclick="TransPage('Findmine.jsp');">&nbsp;&nbsp;&nbsp;
-	<input type="button" value="회원 가입" onclick="TransPage('JoinForm.jsp');" class="btn"></td>
-	</tr>
-</table>
-</form>
-</div>
-<div class="space"></div>
-<div class="space"></div>
-<div class="space"></div>
-</div>
 
 <script>
 $(document).ready(function(){

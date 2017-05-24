@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
     pageEncoding="utf-8"%>
+ <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ page 
 	  	 import="article.dao.*"
 	  	 import="article.model.*"
@@ -16,6 +17,9 @@
 	  	 
 <%
 
+	pageContext.setAttribute("br","<br/>");
+	pageContext.setAttribute("cn","\n");
+	
 	HttpSession sess = request.getSession(false);
 
 	User user = (User)sess.getAttribute("authUser");

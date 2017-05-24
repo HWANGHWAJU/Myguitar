@@ -175,7 +175,7 @@ function TransPage(str){
 				} %>
 			</table></div>
 	
-	
+		<div class="space"></div>
 		
 		<a href="WriteMusicView.jsp"> 글 쓰 기 </a>
 
