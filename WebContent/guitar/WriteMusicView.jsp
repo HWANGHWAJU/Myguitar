@@ -128,7 +128,7 @@ div .container .form .f{
 
 
 
-<div>
+<div style="height: 750px;">
 	<div class="container text-center">
 	
 		<div class="row text-center">
@@ -146,24 +146,24 @@ div .container .form .f{
 		<div class="form">
 			<div class="f">
 			<form action="WriteMusic.jsp" method="post" name="inputMusic" enctype="multipart/form-data" id="form">
-				<table width="100%">
+				<table>
 				
-					<tr>
-						<td width="10%">Title</td>
-						<td align="left"  class="head">&nbsp;<select id="header" name="header" >
+			<tr>
+ 			<td>Title &nbsp;</td>
+ 			<td><select id="header" name="header">
 								<option value="" selected="selected">말머리</option>
 								<option value="guitar" >Guitar</option>
 								<option value="ukulele" >Ukulele</option>
 								<option value="piano" >Piano</option>
 								<option value="etc">기타</option>
-							</select></td>
-						<td></td>
+							</select>
+							<input type="text" id="Musictitle" name="Musictitle" style="width:500px;" >
+							</td>
 				 	</tr>
 				 	
 					<tr>
 						<td>&nbsp;</td>
 						<td height="30" colspan="2">
-						<input type="text" id="Musictitle" name="Musictitle" style="width:85%; margin-left:0; padding-left:0;">
 						</td>
 					</tr>
 					

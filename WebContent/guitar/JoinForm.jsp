@@ -54,13 +54,17 @@
 
 
 
-
-	table tr{
-		height: 15px;
+	.tbl .tab{
+		width: 80%;
 	}
 	
-	.btn{
+	.tab tr{
+		height: 30px;
+	}
 	
+	
+	
+	.btn , .check{
 	text-transform: uppercase;
 	border: 1px solid #c59a6d;
 	word-spacing: 2px;
@@ -69,7 +73,6 @@
 	font-size: 12px;
 	color: #ffffff;
 	transition: all 0.5s;
-	
 	}
 </style>
 
@@ -83,7 +86,7 @@ joinform.inputid.focus();
 </script>
 <script type="text/javascript">
 function CheckID(){
-	window.open("IDcheckView.jsp", "chk", "width=500, height=100");
+	window.open("IDcheckView.jsp", "chk", "width=500, height=500");
 }
 </script>
 </head>
@@ -98,64 +101,78 @@ function CheckID(){
 	</div>
 
 </div>
+<div style="height: 800px;">
 <div class="space"></div>
-<div class="space"></div>
-<div class="container text-center">
-<form action="Join.jsp" method="post" name="joinform" onsubmit="return JoinCheck();">
-<table class="table"align="center" width="80%"  >
-	<tr>
-		<td colspan="2" align="right">* ID 입력 </td>
-		<td><input type="text" id="inputid" name="inputid"></td>
-		<td><input type="button"  class="check" value="중복 확인" onclick="CheckID();" ></td>
-	</tr>
-	
-	<tr>
-		<td colspan="2" align="right">* Password </td>
-		<td><input type="password" id="inputpw" name="inputpw" ></td>
-		<td></td>
-	</tr>
-	<tr>
-		<td colspan="2" align="right">* Password confirm	</td>
-		<td><input type="password" id="pwcon" name="pwcon"></td>
-		<td></td>
-	</tr>
-	<tr>
-		<td colspan="2" align="right">* Name </td>
-		<td><input type="text" id="inputname" name="inputname">
-		</td>
-	</tr>
-	<tr>
-		<td colspan="2" align="right">* Age </td>
-		<td><input type="number" id="inputage" name="inputage">
-		</td>
-		<td></td>
-	</tr>
-
-	<tr>
-		<td colspan="2" align="right">* E-Mail </td>
-		<td><input type="email" id="inputemail" name="inputemail">
-		</td> 
-		<td></td>
-	</tr>
-	
-<tr><td height="14" colspan="3"></td>
-</tr>
-
-	<tr  >
-	<td align="center"  colspan="4" >
-	<input type="submit"  id="doit"value="회원 가입">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-	<input type="reset"  id="re" value="다시 쓰기" >
-	</td>
-	</tr>	
-	<tr>
-	<td colspan="4"><a href="Loginform.jsp">HOME</a></td>
-	</tr>
-</table>
-
-</form>
+<div class="text-center">
+<h1>Welcome : )</h1>
+<hr>
+회원 정보를 입력 해주세요 !
 </div>
+<div style="height: 100px;"></div>
+
+		<div class="container text-center">
+				<div class="tbl">
+											<form action="Join.jsp" method="post" name="joinform" onsubmit="return JoinCheck();">
+												<table class="tab"align="center" >
+													<tr>
+														<td colspan="2" align="right">*ID </td>
+														<td><input type="text" id="inputid" name="inputid"></td>
+														<td align="left"><input type="button"  class="check" value="중복 확인" onclick="CheckID();"></td>
+													</tr>
+													
+													<tr>
+														<td colspan="2" align="right">* Password </td>
+														<td><input type="password" id="inputpw" name="inputpw" ></td>
+														<td></td>
+													</tr>
+													<tr>
+														<td colspan="2" align="right">* Password confirm	</td>
+														<td><input type="password" id="pwcon" name="pwcon"></td>
+														<td></td>
+													</tr>
+													<tr>
+														<td colspan="2" align="right">* Name </td>
+														<td><input type="text" id="inputname" name="inputname">
+														</td>
+													</tr>
+													<tr>
+														<td colspan="2" align="right">* Age </td>
+														<td><input type="number" id="inputage" name="inputage">
+														</td>
+														<td></td>
+													</tr>
+												
+													<tr>
+														<td colspan="2" align="right">* E-Mail </td>
+														<td><input type="email" id="inputemail" name="inputemail">
+														</td> 
+														<td></td>
+													</tr>
+													
+												<tr><td height="14" colspan="3"></td>
+												</tr>
+												
+													<tr  >
+													<td align="center"  colspan="4" >
+													<input type="submit"  id="doit"value="회원 가입" class="btn">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+													<input type="reset"  id="re" value="다시 쓰기"  class="btn">
+													</td>
+													</tr>
+													<tr><td></td></tr>	
+													<tr>
+													<td colspan="4"><a href="Guestindex.jsp">HOME</a></td>
+													</tr>
+												</table>
+												
+											</form>
+
+	</div>
+</div>
+
+
 <div class="space"></div>
 <div class="space"></div>
+</div>
  <nav id="footer">
         <div class="container">
              <div class="pull-left">

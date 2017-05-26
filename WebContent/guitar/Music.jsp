@@ -117,7 +117,8 @@ function TransPage(str){
 		</thead>
 	<%--now URL <%=request.getRequestURI() %> --%>
 	<% 	ListArticleService listService = new ListArticleService();
-
+			ArticleViewDao view = new ArticleViewDao();
+			
 		ArticlePage music = (ArticlePage)sess.getAttribute("articlePage");
 		
 		if(music == null){

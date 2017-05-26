@@ -143,8 +143,11 @@ function TransPage(str){
 							</tr>
 						
 							<tr align="center" >
-							<td colspan="4" align="center"><input type="button"  value="ID/PW 찾기" class="btn"" onclick="TransPage('Findmine.jsp');">&nbsp;&nbsp;&nbsp;
-							<input type="button" value="회원 가입" onclick="TransPage('JoinForm.jsp');" class="btn"></td>
+							<td colspan="4" align="center">
+							<input type="button"  value="ID/PW 찾기" class="btn"" onclick="TransPage('Findmine.jsp');">
+							<input type="button" value="회원 가입" onclick="TransPage('JoinForm.jsp');" class="btn">
+							<input type="button" value="HOME" onclick="TransPage('Guestindex.jsp');" class="btn">
+							</td>
 							</tr>
 							
 						</table>

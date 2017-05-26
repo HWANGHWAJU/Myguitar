@@ -42,8 +42,10 @@ function TransPage(str){
 </script>
 </head>
 <body>
-<h1>가입을 환영합니다:)</h1>
-<input type="button" value="가입을 환영합니다 : )" onclick="TransPage('Loginform.jsp');">
+<script>
+alert("가입을 환영합니다 :)");
+location.replace("Guestindex.jsp");
+</script>
 
 	
 </body>

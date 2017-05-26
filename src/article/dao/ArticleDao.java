@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import article.model.Article;
+import article.model.ArticleView;
 import article.model.AWriter;
 import jdbc.JdbcUtil;
 
@@ -167,6 +168,32 @@ public class ArticleDao {
 
 		}
 	}
+	
+	
+	public List<ArticleView> selectView(Connection conn) throws SQLException{
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		try {
+			pstmt = conn.prepareStatement("select * from msource order by music_num desc");
+			//limit 는 일부레코드만 조회할 때 사용 1, 읽어올 레코드의 첫번재 행 2, 읽어올 레코드의 개수 
+
+			rs = pstmt.executeQuery();
+	
+			List<ArticleView> result = new ArrayList<>();
+
+			while (rs.next()) {
+				result.add(convertArticleV(rs));
+			}
+			return result;
+		} finally {
+			JdbcUtil.close(rs);
+			JdbcUtil.close(pstmt);
+
+		}
+	}
+	private ArticleView convertArticleV(ResultSet rs) throws SQLException {
+		return new ArticleView( rs.getInt("music_num"), rs.getString("music_title"), rs.getString("filename"), rs.getString("filename2"), rs.getInt("reply") );																							
+}
 
 		//resultset 에서 데이터를 읽어와 aritcle 객체 생성 
 /*	private Article convertArticle(ResultSet rs) throws SQLException {

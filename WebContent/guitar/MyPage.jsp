@@ -240,12 +240,13 @@ function doAnsDisplay(answer){
 	<div class="space"></div>
 
 	<div>
+		<div style="height:800px;">
 		<div class="container text-center">
 			<div class="row text-center">
 				<div class="selection-title">
 					<h2>My Page</h2>
 					<hr>
-					
+					<%=user.getId() %>님의 Page입니다 : )
 				</div>
 
 
@@ -282,7 +283,7 @@ function doAnsDisplay(answer){
 
 
 
-
+	</div>
 </div> <!-- 전체 div -->
 
     <nav id="footer">

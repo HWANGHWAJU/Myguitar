@@ -159,6 +159,7 @@
 				<div class="section-title">
 				<h1>Video _ <%=videoData.getVideo().getTitle()%></h1>
 				<hr>
+				<%=user.getId() %>님 어떤 동영상을 보러 왔오 : ) ?
 				</div>
 			</div>
 		</div>

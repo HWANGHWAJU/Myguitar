@@ -184,6 +184,7 @@
 			<div class="section-title">
 			<h1><%=articleData.getArticle().getTitle() %></h1>
 			<hr>
+			<%=user.getId() %>님 어떤 악보를 읽으러 왔오 :) ?
 				</div>
 			</div>
 		</div>
@@ -254,7 +255,7 @@
 							<a href="javascript:imgShow('img');">Show me your file ; )</a>
 				</div>
 			
-				<div class="container text-center" id="img" style="display:none;">
+				<div class="container text-center" id="img" style="display:none; overflow: scroll;">
 					<%if(articleData.getFilename1() != null ){ %>
 					<img src="upload/<%=articleData.getFilename1() %>">
 					<%}
